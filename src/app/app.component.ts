@@ -1,14 +1,27 @@
 import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterOutlet } from '@angular/router';
+import { Router } from '@angular/router';
+import { User } from './object/user';
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [CommonModule, RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+	selector: 'app-root',
+	templateUrl: './app.component.html',
+	styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'checkspot-frontend';
+	private user: User = {
+		id: 1,
+		name: 'admin',
+		mail: 'a@a.com',
+		password: 'a',
+		createdDate: new Date(),
+		darkMode: false,
+		isLogin: true,
+	};
+	constructor(private router: Router) {
+		if (this.user.isLogin) {
+			router.navigate(['']);
+		} else {
+			router.navigate(['login']);
+		}
+	}
 }
