@@ -1,4 +1,4 @@
-<div class="cs-login" (resize)="handleResize($event)">
+<div class="cs-login">
     <div class="cs-login--wrapper">
         <cs-login-panel [@loginAnimation] *ngIf="!register"></cs-login-panel>
         <div [@templateAnimation]="{value:stateName, params:{
@@ -6,6 +6,7 @@
             left: panelTemplateParams.left,
             top: panelTemplateParams.top,
             midLeft: panelTemplateParams.midLeft,
+            position: panelTemplateParams.position,
         }}" class="cs-login--placeholder" 
         [ngClass]="{'cs-login--placeholder__login': !register, 
             'cs-login--placeholder__register': register}">

@@ -3,6 +3,7 @@ export interface PanelTemplateParams {
 	left: number;
 	top: number;
 	midLeft: number;
+	position: string;
 }
 
 export class AnimationHelper {
@@ -10,7 +11,7 @@ export class AnimationHelper {
 		isWidthOver: boolean
 	): PanelTemplateParams {
 		return isWidthOver
-			? { right: 5, left: 60, midLeft: 40, top: 0 }
-			: { right: 0, left: 0, midLeft: 0, top: 1 };
+			? { right: 5, left: 60, midLeft: 40, top: 0, position: 'absolute' }
+			: { right: 0, left: 0, midLeft: 10, top: 100, position: 'relative' };
 	}
 }

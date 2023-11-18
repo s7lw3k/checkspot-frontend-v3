@@ -50,11 +50,23 @@ import { MatButtonModule } from '@angular/material/button';
 			<ng-template #popupContent></ng-template>
 			<new-spot-popup></new-spot-popup>
 		</div>
-		<button style="z-index: 10000; position: relative; margin: 20px;" mat-raised-button (click)="genRandomSpots()">GenLos</button>
+		<button
+			style="z-index: 10000; position: relative; margin: 20px;"
+			mat-raised-button
+			(click)="genRandomSpots()"
+		>
+			GenLos
+		</button>
 	`,
 	styleUrls: ['./map.component.scss'],
 	standalone: true,
-	imports: [NewSpotComponent, LeafletModule, CommonModule, LeafletMarkerClusterModule, MatButtonModule],
+	imports: [
+		NewSpotComponent,
+		LeafletModule,
+		CommonModule,
+		LeafletMarkerClusterModule,
+		MatButtonModule,
+	],
 })
 export class MapComponent implements OnInit, OnDestroy {
 	private clusterGroup: MarkerClusterGroup;
@@ -87,7 +99,9 @@ export class MapComponent implements OnInit, OnDestroy {
 	) {}
 
 	ngOnInit() {
-		this.clusterGroup = new MarkerClusterGroup({removeOutsideVisibleBounds: true});
+		this.clusterGroup = new MarkerClusterGroup({
+			removeOutsideVisibleBounds: true,
+		});
 		this.spotService.clusterGroup = this.clusterGroup;
 	}
 
@@ -122,12 +136,12 @@ export class MapComponent implements OnInit, OnDestroy {
 	};
 
 	public genRandomSpots(): void {
-		for (let i = 0; i < 50; i++) {
+		for (let i = 0; i < 3; i++) {
 			this.spotService.cords = {
 				lat: Math.random() * 0.15 + 50,
-				lng: Math.random() * 0.4 + 19.8
+				lng: Math.random() * 0.4 + 19.8,
 			} as LatLng;
-			this.spotService.createSpot('losT','losD')
+			this.spotService.createSpot('losT', 'losD');
 		}
 	}
 }

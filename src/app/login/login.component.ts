@@ -44,9 +44,17 @@ const delay = 350;
 					right: '{{right}}%',
 					color: 'black',
 					zIndex: 1000,
-					position: 'absolute',
+					position: '{{position}}',
 				}),
-				{ params: { right: 1, left: 1, midLeft: 60, top: 0 } }
+				{
+					params: {
+						right: 1,
+						left: 1,
+						midLeft: 60,
+						top: 0,
+						position: 'absolute',
+					},
+				}
 			),
 			state(
 				'register',
@@ -55,39 +63,48 @@ const delay = 350;
 					zIndex: 1000,
 					position: 'relative',
 				}),
-				{ params: { right: 1, left: 1, midLeft: 60, top: 0 } }
+				{
+					params: {
+						right: 1,
+						left: 1,
+						midLeft: 60,
+						top: 0,
+						position: 'absolute',
+					},
+				}
 			),
 			transition('login => register', [
 				style({
 					left: '{{left}}%',
 					color: 'black',
-					position: 'absolute',
+					position: '{{position}}',
 				}),
 				animate(
 					delay / 2,
 					style({
 						left: 'calc({{midLeft}}vw - 5%)',
 						scale: 0.9,
-						position: 'absolute',
+						position: '{{position}}',
 					})
 				),
 				animate(
 					delay / 2 + 10,
 					style({
-						left: '5%',
+						left: '{{right}}%',
 						scale: 1,
-						position: 'absolute',
+						position: '{{position}}',
 					})
 				),
 			]),
 			transition('register => login', [
 				style({
 					position: 'absolute',
+					left: '10%',
 				}),
 				animate(
 					delay / 2,
 					style({
-						left: 'calc({{midLeft}}vw - 5%)',
+						left: 'calc({{midLeft}}vw - {{right}}%)',
 						scale: 0.9,
 						position: 'absolute',
 					})
@@ -95,7 +112,7 @@ const delay = 350;
 				animate(
 					delay / 2,
 					style({
-						left: 'calc({{left}}vw - 5%)',
+						left: 'calc({{left}}vw - {{right}}%)',
 						scale: 1,
 						position: 'absolute',
 					})
@@ -129,9 +146,5 @@ export class LoginComponent implements OnInit {
 
 	get templateButtonContent() {
 		return this.register ? 'Kliknij aby\n się zalogować' : 'Click to register';
-	}
-
-	public handleResize($event: any): void {
-		console.log($event);
 	}
 }

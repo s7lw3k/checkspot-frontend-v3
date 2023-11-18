@@ -10,5 +10,5 @@ export interface Spot {
 	address?: Address;
 	issuedBy?: User;
 	opinions?: Opinion[];
-	coordinates: LatLng;
+	coordinates?: LatLng;
 }
