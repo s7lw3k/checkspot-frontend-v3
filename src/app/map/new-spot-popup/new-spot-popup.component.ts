@@ -8,7 +8,7 @@ import {
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { User } from 'src/app/object/user';
+import { User } from '../../models/user.model';
 import { PopupService } from 'src/app/services/popup.service';
 import { SpotService } from 'src/app/services/spot.service';
 

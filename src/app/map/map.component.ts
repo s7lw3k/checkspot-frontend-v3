@@ -33,6 +33,7 @@ import { SpotService } from '../services/spot.service';
 import { PopupService } from '../services/popup.service';
 import { LeafletMarkerClusterModule } from '@asymmetrik/ngx-leaflet-markercluster';
 import { MatButtonModule } from '@angular/material/button';
+import { consumerPollProducersForChange } from '@angular/core/primitives/signals';
 @Component({
 	selector: 'cs-map',
 	// templateUrl: './map.component.html',
@@ -101,7 +102,28 @@ export class MapComponent implements OnInit, OnDestroy {
 	ngOnInit() {
 		this.clusterGroup = new MarkerClusterGroup({
 			removeOutsideVisibleBounds: true,
+			zoomToBoundsOnClick: false,
+			showCoverageOnHover: false,
 		});
+		this.clusterGroup
+			.on('clusterclick', (cluster: any) => {
+				this.map.closePopup();
+				let popupContent: string = '';
+				popupContent += '<h1>Markery w środku</h1>';
+				for (const marker of cluster.layer.getAllChildMarkers()) {
+					popupContent += `<p>${marker}</p>`;
+				}
+				const popup = new Popup()
+					.setLatLng(cluster.layer.getLatLng())
+					.setContent(
+						cluster.layer.getChildCount() + ' Locations(click to Zoom)'
+					)
+					.openOn(this.map);
+				console.log(cluster.layer.getAllChildMarkers());
+			})
+			.on('mouseout', (event) => {
+				this.map.closePopup();
+			});
 		this.spotService.clusterGroup = this.clusterGroup;
 	}
 
@@ -136,7 +158,7 @@ export class MapComponent implements OnInit, OnDestroy {
 	};
 
 	public genRandomSpots(): void {
-		for (let i = 0; i < 3; i++) {
+		for (let i = 0; i < 300; i++) {
 			this.spotService.cords = {
 				lat: Math.random() * 0.15 + 50,
 				lng: Math.random() * 0.4 + 19.8,

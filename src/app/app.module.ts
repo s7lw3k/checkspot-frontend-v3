@@ -12,6 +12,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterPanelComponent } from './login/register-panel/register-panel.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NewSpotComponent } from './map/new-spot-popup/new-spot-popup.component';
+import { addSpotReducer } from './reducers/spot.reducer';
+import { StoreModule } from '@ngrx/store';
 
 @NgModule({
 	declarations: [AppComponent],
@@ -25,6 +27,7 @@ import { NewSpotComponent } from './map/new-spot-popup/new-spot-popup.component'
 		RegisterPanelComponent,
 		HttpClientModule,
 		NewSpotComponent,
+		// StoreModule.forRoot({ spot: addSpotReducer }),
 	],
 	providers: [provideAnimations()],
 	bootstrap: [AppComponent],

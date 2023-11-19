@@ -4,5 +4,5 @@ export interface Address {
 	houseNumber: string;
 	apartmentNumber: number;
 	floor: string;
-	neighborhood: string;
+	// neighborhood: string;
 }
